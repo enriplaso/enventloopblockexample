@@ -29,7 +29,7 @@ app.get('/not-block-event-loop', async (req, res) => {
     const breath = async iteration => new Promise(resolve => setImmediate(() => { console.log("event loop i: " + iteration); resolve(); }))
     for (let i = 0; i < 10e6; i++) {
         await hash.update("anyString")
-        await breath()
+        await breath(i)
     }
     res.send('Finished long running task')
 })
